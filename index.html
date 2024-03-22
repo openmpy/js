@@ -9,7 +9,70 @@
 
 <body>
 
-    <script src="test.js"></script>
+    <!-- 로그인 및 로그아웃 버튼 추가 -->
+    <button id="loginBtn">로그인</button>
+    <button id="logoutBtn">로그아웃</button>
+    
+    <script>
+        // signIn 함수
+        async function signIn() {
+            const url = 'https://www.openmpy.com/api/v1/members/signin';
+            const data = {
+                username: "test@test.com",
+                password: "test123!"
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST', // 요청 방식 설정
+                    headers: {
+                        'Content-Type': 'application/json' // 보내는 데이터의 컨텐츠 유형
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(data) // JavaScript 객체를 JSON 문자열로 변환
+                });
+
+                if (!response.ok) {
+                    throw new Error('Request failed with status ' + response.status);
+                }
+
+                const result = await response.json(); // 응답 본문을 JSON으로 파싱
+                console.log(result); // 결과 출력
+            } catch (error) {
+                console.error('Error during the fetch operation: ', error);
+            }
+        }
+
+        // logout 함수 (주석 해제)
+        async function logout() {
+            const url = 'https://www.openmpy.com/api/v1/members/logout';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST', // 요청 방식 설정
+                    headers: {
+                        'Content-Type': 'application/json' // 보내는 데이터의 컨텐츠 유형
+                    },
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Request failed with status ' + response.status);
+                }
+
+                const result = await response.json(); // 응답 본문을 JSON으로 파싱
+                console.log(result); // 결과 출력
+            } catch (error) {
+                console.error('Error during the fetch operation: ', error);
+            }
+        }
+
+        // 로그인 버튼 클릭 이벤트 리스너 추가
+        document.getElementById('loginBtn').addEventListener('click', signIn);
+
+        // 로그아웃 버튼 클릭 이벤트 리스너 추가
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+    </script>
 </body>
 
 </html>
