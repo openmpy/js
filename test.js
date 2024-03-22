@@ -1,7 +1,7 @@
 async function signIn() {
     const url = 'https://www.openmpy.com/api/v1/members/signin';
     const data = {
-        username: "suhwan@kakao.com",
+        username: "test@test.com",
         password: "test123!"
     };
 
