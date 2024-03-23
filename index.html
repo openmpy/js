@@ -55,19 +55,11 @@
                     },
                     credentials: 'include'
                 });
-
-                if (!response.ok) {
-                    throw new Error('Request failed with status ' + response.status);
-                }
-
-                const result = await response.json(); // 응답 본문을 JSON으로 파싱
-                console.log(result); // 결과 출력
             } catch (error) {
                 console.error('Error during the fetch operation: ', error);
             }
         }
 
-        // logout 함수 (주석 해제)
         async function logout() {
             const url = 'https://www.openmpy.com/api/v1/members/logout';
 
@@ -79,13 +71,6 @@
                     },
                     credentials: 'include'
                 });
-
-                if (!response.ok) {
-                    throw new Error('Request failed with status ' + response.status);
-                }
-
-                const result = await response.json(); // 응답 본문을 JSON으로 파싱
-                console.log(result); // 결과 출력
             } catch (error) {
                 console.error('Error during the fetch operation: ', error);
             }
