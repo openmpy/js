@@ -97,6 +97,19 @@
                     },
                     credentials: 'include'
                 });
+
+                if (!response.ok) {
+                    throw new Error('Request failed with status ' + response.status);
+                }
+
+                // 응답 헤더에서 'Authorization' 값을 가져옵니다.
+                const authToken = response.headers.get('Authorization');
+                if (authToken) {
+                    // 'Authorization' 헤더 값을 localStorage에 저장합니다.
+                    localStorage.setItem('accessToken', authToken);
+                } else {
+                    console.log('Authorization 헤더가 존재하지 않습니다.');
+                }
             } catch (error) {
                 console.error('Error during the fetch operation: ', error);
             }
