@@ -14,7 +14,7 @@
     <button id="loginBtn">로그인</button>
     <button id="reissueBtn">재발행</button>
     <button id="logoutBtn">로그아웃</button>
-    <button id="showRefreshTokenBtn">Refresh-token 보기</button>
+    <button id="productBtn">상품보기</button>
     
     <script>
         // signup 함수
@@ -102,6 +102,26 @@
             }
         }
 
+        async function product() {
+            const url = 'https://www.openmpy.com/api/v1/members/bookmarks?page=1&size=10';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'GET', // 요청 방식 설정
+                    headers: {
+                        'Content-Type': 'application/json', // 보내는 데이터의 컨텐츠 유형
+                        'Authorization: localStorage.getItem('accessToken')
+                    },
+                    credentials: 'include'
+                });
+
+                const result = await response.json(); // 응답 본문을 JSON으로 파싱
+                console.log(result); // 결과 출력
+            } catch (error) {
+                console.error('Error during the fetch operation: ', error);
+            }
+        }
+
         async function logout() {
             const url = 'https://www.openmpy.com/api/v1/members/logout';
 
@@ -152,8 +172,8 @@
         // 로그아웃 버튼 클릭 이벤트 리스너 추가
         document.getElementById('logoutBtn').addEventListener('click', logout);
 
-        // Refresh-token 보기 버튼 클릭 이벤트 리스너 추가
-        document.getElementById('showRefreshTokenBtn').addEventListener('click', showRefreshToken);
+        // 상품 보기
+        document.getElementById('productBtn').addEventListener('click', product);
     </script>
 </body>
 
