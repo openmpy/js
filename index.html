@@ -15,6 +15,7 @@
     <button id="reissueBtn">재발행</button>
     <button id="logoutBtn">로그아웃</button>
     <button id="showRefreshTokenBtn">Refresh-token 보기</button>
+    <button id="addRefreshTokenBtn">Refresh-token 추가</button>
     
     <script>
         // signup 함수
@@ -125,6 +126,24 @@
             return cookieValue;
         }
 
+        // 쿠키를 설정하는 함수
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+
+        // Refresh-token 쿠키를 추가하는 함수
+        function addRefreshToken() {
+            const refreshTokenValue = "asdasd"; // 예시를 위한 임의의 토큰 값
+            setCookie('Refresh-token', refreshTokenValue, 7); // 'Refresh-token' 쿠키 설정, 7일 후 만료
+            console.log('Refresh-token 쿠키가 추가되었습니다.');
+        }
+
         // 회원가입 버튼 클릭 이벤트 리스너 추가
         document.getElementById('signupBtn').addEventListener('click', signup);
 
@@ -136,6 +155,9 @@
 
         // 로그아웃 버튼 클릭 이벤트 리스너 추가
         document.getElementById('logoutBtn').addEventListener('click', logout);
+
+        // Refresh-token 추가 버튼 클릭 이벤트 리스너 추가
+        document.getElementById('addRefreshTokenBtn').addEventListener('click', addRefreshToken);
 
         // Refresh-token 쿠키 값을 보여주는 함수
         function showRefreshToken() {
