@@ -110,7 +110,7 @@
                     method: 'GET', // 요청 방식 설정
                     headers: {
                         'Content-Type': 'application/json', // 보내는 데이터의 컨텐츠 유형
-                        'Authorization: localStorage.getItem('accessToken')
+                        'Authorization': localStorage.getItem('accessToken')
                     },
                     credentials: 'include'
                 });
